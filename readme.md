@@ -1,6 +1,6 @@
 # Oh my system
 
-Status : [![CircleCI](https://circleci.com/gh/earendil06/kazaar-configuration/tree/master.svg?style=svg)](https://circleci.com/gh/earendil06/kazaar-configuration/tree/master)
+Status : [![CircleCI](https://circleci.com/gh/earendil06/oh-my-system/tree/master.svg?style=svg)](https://circleci.com/gh/earendil06/oh-my-system/tree/master)
 
 Oh My System is an open source framework for configuring your linux based OS.
 This framework is specifically made for you if you match this points :
