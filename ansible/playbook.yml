@@ -1,0 +1,47 @@
+- hosts: localhost
+
+  tasks:
+    - name: Install the basic packages
+      package:
+        name: "{{ packages }}"
+
+    - name: Configure git
+      block:
+        - name: Install git package
+          package:
+            name: git
+        - name: Configure git name
+          git_config:
+            name: user.name
+            scope: global
+            value: "{{ git_username }}"
+        - name: Configure git email
+          git_config:
+            name: user.email
+            scope: global
+            value: "{{ git_email }}"
+
+    - name: Configure docker
+      block:
+        - name: Add docker GPG key
+          apt_key: url=https://download.docker.com/linux/ubuntu/gpg
+        - name: Add docker repository
+          apt_repository:
+            repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ansible_distribution_release}} stable
+        - name: Install docker package
+          package:
+            name: docker-ce
+        - name: Install docker-compose package
+          shell: curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+        - name: add execution permissions for docker-compose
+          shell: chmod +x /usr/local/bin/docker-compose
+
+    - name: Change terminal to zsh
+      block:
+        - name: Install zsh
+          package:
+            name: zsh
+        - name: Configure zsh with oh-my-zsh
+          shell: sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+        - name: Default exec zsh with bash
+          shell: echo "\nexec zsh\n" >> $HOME/.bashrc

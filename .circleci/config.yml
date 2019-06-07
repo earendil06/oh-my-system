@@ -1,0 +1,38 @@
+version: 2.0
+jobs:
+  build:
+    working_directory: /temp
+    docker:
+      - image: alpine/git
+    steps:
+      - checkout
+      - attach_workspace:
+          at: /temp
+      - run: ls
+      - persist_to_workspace:
+          root: /temp
+          paths:
+            - ./ansible
+            - ./scripts
+  test:
+    working_directory: /temp
+    docker:
+      - image: earendil06/kazaar-configuration
+    steps:
+      - attach_workspace:
+          at: /temp
+      - run: mv ./ansible/* /ansible
+      - run: ls -R /ansible
+      - run: ./scripts/install-galaxy.sh
+      - run: ./scripts/run-playbook.sh
+
+
+workflows:
+  version: 2
+  build_test:
+    jobs:
+      - build:
+
+      - test:
+          requires:
+            - build

@@ -1,0 +1,9 @@
+{
+  "packages": [
+    "curl",
+    "wget",
+    "tmux",
+    "htop",
+    "vim"
+  ]
+}
