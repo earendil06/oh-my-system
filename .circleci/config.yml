@@ -8,7 +8,6 @@ jobs:
       - checkout
       - attach_workspace:
           at: /temp
-      - run: ls
       - persist_to_workspace:
           root: /temp
           paths:
@@ -21,10 +20,15 @@ jobs:
     steps:
       - attach_workspace:
           at: /temp
-      - run: mv ./ansible/* /ansible
-      - run: ls -R /ansible
-      - run: ./scripts/install-galaxy.sh
-      - run: ./scripts/run-playbook.sh
+      - run:
+          name: "Copy of the sources"
+          command: mv ./ansible/* /ansible
+      - run:
+          name: "Install additional plugins & dependencies"
+          command: ./scripts/install-galaxy.sh
+      - run:
+          name: "Run the playbook"
+          command: ./scripts/run-playbook.sh
 
 
 workflows:
