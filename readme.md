@@ -16,6 +16,7 @@ This framework is specifically made for you if you match this points :
 * Linux
 * Ansible (2+) playbook should be installed
 * git (to clone this repository)
+* sshpass (apt install sshpass) if you want to target a remote host
 
 ### Configure
 
@@ -27,7 +28,7 @@ This framework is specifically made for you if you match this points :
 
 ```shell
 ansible-galaxy install -r ./ansible/requirements.yml
-ansible-playbook ./ansible/playbook.yml --extra-vars "@./ansible/globals.json" --extra-vars "@./ansible/customs.json"
+ansible-playbook ./ansible/playbook.yml --extra-vars "@./ansible/globals.json" --extra-vars "@./ansible/customs.json"  --extra-vars "hosts" -i ./ansible/hosts
 ```
 
 ## How do I contribute to Oh My System?
