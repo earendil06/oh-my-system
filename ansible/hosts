@@ -1,0 +1,18 @@
+# Please uncomment the settings matching your situation
+
+# if you execute the playbook on your local computer
+[hosts]
+localhost
+
+[all:vars]
+ansible_connection=local
+
+
+# if you execute the playbook on a remote computer
+#[hosts]
+#192.168.33.10 #replace with your remote IP
+
+#[all:vars]
+#ansible_connection=ssh
+#ansible_user=vagrant #replace with your own remote user
+#ansible_ssh_pass=vagrant #replace with your own remote pass

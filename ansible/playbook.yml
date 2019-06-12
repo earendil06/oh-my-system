@@ -1,4 +1,5 @@
-- hosts: localhost
+- hosts: hosts
+  sudo: yes
 
   tasks:
     - name: Install the basic packages
@@ -20,6 +21,19 @@
             name: user.email
             scope: global
             value: "{{ git_email }}"
+
+    - name: Install java 11
+      block:
+        - name: Add java ppa repository
+          apt_repository:
+            repo: ppa:linuxuprising/java
+        - name: Accept installer certificate
+          shell: echo "oracle-java11-installer shared/accepted-oracle-license-v1-2 select true" | debconf-set-selections
+        - name: Install java11 installer
+          package:
+            name: oracle-java11-installer
+        - name: Set JAVA_HOME variable
+          shell: echo "export JAVA_HOME=\"/usr/lib/jvm/java-11-oracle/\"" >> ~/.profile
 
     - name: Configure docker
       block:
