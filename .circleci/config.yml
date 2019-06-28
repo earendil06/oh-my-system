@@ -20,14 +20,18 @@ jobs:
   test:
     docker:
       - image: earendil06/oh-my-system
+        environment:
+          ANSIBLE_PATH: toto
     steps:
       - checkout
+      - run: ls
+      - run: echo $PWD
       - run:
-          name: "Install additional plugins & dependencies"
-          command: ./scripts/install-galaxy.sh
+          name: Install additional plugins & dependencies
+          command: install-galaxy
       - run:
-          name: "Run the playbook"
-          command: ./scripts/run-playbook.sh
+          name: Run the playbook
+          command: run-playbook
 
 
 workflows:
@@ -38,8 +42,3 @@ workflows:
       - test:
           requires:
             - build
-#workflows:
-#  version: 2
-#  test:
-#    jobs:
-#      - test
