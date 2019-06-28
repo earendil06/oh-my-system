@@ -21,11 +21,9 @@ jobs:
     docker:
       - image: earendil06/oh-my-system
         environment:
-          ANSIBLE_PATH: toto
+          ANSIBLE_PATH: /root/project/ansible
     steps:
       - checkout
-      - run: ls
-      - run: echo $PWD
       - run:
           name: Install additional plugins & dependencies
           command: install-galaxy
