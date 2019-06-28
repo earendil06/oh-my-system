@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-ansible-playbook $ANSIBLE_PATH/playbooks/playbook.yml \
---extra-vars "@$ANSIBLE_PATH/config/globals.json" \
---extra-vars "@$ANSIBLE_PATH/config/customs.json" \
---extra-vars "hosts" -i $ANSIBLE_PATH/config/hosts
+ansible-playbook $1/playbooks/playbook.yml \
+--extra-vars "@$1/config/globals.json" \
+--extra-vars "@$1/config/customs.json" \
+--extra-vars "hosts" -i $1/config/hosts
