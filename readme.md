@@ -27,8 +27,8 @@ This framework is specifically made for you if you match this points :
 ### Using Oh My System
 
 ```shell
-ansible-galaxy install -r ./ansible/requirements.yml
-ansible-playbook ./ansible/playbook.yml --extra-vars "@./ansible/globals.json" --extra-vars "@./ansible/customs.json"  --extra-vars "hosts" -i ./ansible/hosts
+$PATH_REPO/scripts/install-galaxy $PATH_REPO/ansible
+$PATH_REPO/scripts/run-playbook $PATH_REPO/ansible
 ```
 
 ## How do I contribute to Oh My System?
@@ -36,12 +36,12 @@ ansible-playbook ./ansible/playbook.yml --extra-vars "@./ansible/globals.json" -
 
 
 ##### test the playbook
-```bash
-docker build -t kazaar .
-docker run --rm --name kazaar -it -v $PWD/ansible:/ansible -v $PWD/scripts:/scripts kazaar
+```shell
+docker run --rm --name oh-my-system -it -v $PATH_REPO/ansible:/ansible earendil06/oh-my-system:latest
 
-#container$ ./install-galaxy.sh
-#container$ ./run-playbook.sh
+##Then inside the container execute :
+#container$ /scripts/install-galaxy /ansible
+#container$ /scripts/run-playbook /ansible
 ```
 
 ## Contributors
