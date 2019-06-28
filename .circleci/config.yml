@@ -26,10 +26,10 @@ jobs:
       - checkout
       - run:
           name: Install additional plugins & dependencies
-          command: install-galaxy $ANSIBLE_PATH
+          command: /scripts/install-galaxy $ANSIBLE_PATH
       - run:
           name: Run the playbook
-          command: run-playbook $ANSIBLE_PATH
+          command: /scripts/run-playbook $ANSIBLE_PATH
 
 
 workflows:
